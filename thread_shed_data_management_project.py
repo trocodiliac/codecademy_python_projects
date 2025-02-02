@@ -106,8 +106,8 @@ green&white;,;09/15/17,   Gail Phelps   ;,;$30.52
 ;,;   $22.66   ;,; green&white&blue;,;09/15/17"""
 
 #------------------------------------------------
-# Start coding below!
-# Splitting the individual transactions
+
+# Separating all data points
 daily_sales_replaced = daily_sales.replace(';,;', ';')
 daily_transactions = daily_sales_replaced.split(',')
 
@@ -122,6 +122,7 @@ for transaction in daily_transactions_split:
     new_data.append(data.strip())
   transactions_clean.append(new_data)
 
+# Assigning now split and stripped data to associated lists
 customers = []
 sales = []
 thread_sold = []
@@ -130,12 +131,14 @@ for transaction in transactions_clean:
   sales.append(transaction[1])
   thread_sold.append(transaction[2])
 
+# Calculating total $$$ made and printing it to the console
 total_sales = 0
 for sale in sales:
   sale_float = float(sale.strip('$'))
   total_sales += sale_float
 print('We made $' + str(round(total_sales, 2)) + ' in total.')
 
+# Separating joined data within list, effectively individualizing all colors regardless of sale association
 thread_sold_split = []
 for thread in thread_sold:
   if '&' in thread:
@@ -145,6 +148,7 @@ for thread in thread_sold:
   else:
     thread_sold_split.append(thread)
 
+# Function to count the number of occurences of each color
 def color_count(color):
   count = 0
   for thread in thread_sold_split:
@@ -152,7 +156,10 @@ def color_count(color):
       count += 1
   return count
 
+# Printing the colors using the .format() function to make it easily readable both code-wise and in the console
 colors = ['red', 'yellow', 'green', 'white', 'black', 'blue', 'purple']
 for color in colors:
   print('We made {color_count} sales with the color {color}.'.format(color_count=color_count(color), color=color))
+
+# Printing the list containing all customers' names as a string (not necessary, but done to prove it has been sorted)
 print('We sold to the following clients:\n' + str(customers))
